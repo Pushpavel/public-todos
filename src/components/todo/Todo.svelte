@@ -1,28 +1,27 @@
 <script>
+    import {onMount} from "svelte";
     import {addLocalTodo, removeLocalTodo, todos} from "$lib/local";
-    import {getFirestore, doc, updateDoc, increment} from "firebase/firestore";
+    import {doc, getFirestore, increment, updateDoc} from "firebase/firestore";
+
+    export let item
+    export let setRefHeight
+
+    let ref
+    onMount(() => setRefHeight(ref.clientHeight))
 
 
-    export let todo;
+    $: wanted = ($todos).hasOwnProperty(item.id)
 
-    export let span;
-    let card;
-
-    $: {
-        span = card && Math.round((card.clientHeight + 16) / 15) || 1
-    }
-
-    $: wanted = ($todos).hasOwnProperty(todo.id)
 
     const db = getFirestore()
 
     function toggleWantTodo() {
-        const ref = doc(db, `Todos/${todo.id}`)
+        const ref = doc(db, `Todos/${item.id}`)
 
         if (wanted)
-            removeLocalTodo(todo.id)
+            removeLocalTodo(item.id)
         else
-            addLocalTodo(todo)
+            addLocalTodo(item)
 
         updateDoc(ref, {
             want: increment(wanted ? -1 : 1)
@@ -30,8 +29,8 @@
     }
 </script>
 
-<pre class="flex flex-col card p-8 whitespace-pre-line leading-none h-full">
-    <span class="inline-flex" style="overflow-wrap: anywhere" bind:this={card}>{todo.text}</span>
-    <button on:click={toggleWantTodo}>{wanted}</button>
-    <span>{todo.want}</span>
+<pre class="card mb-2 whitespace-pre-wrap leading-none flex flex-col">
+    <span bind:this={ref} class="flex" style="overflow-wrap: anywhere">{item.text}</span>
+        <button on:click={toggleWantTodo}>{wanted}</button>
+    <span>{item.want}</span>
 </pre>

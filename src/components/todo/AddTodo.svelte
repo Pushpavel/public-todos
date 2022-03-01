@@ -24,7 +24,7 @@
     $: charCount = 255 - value.length
 </script>
 
-<div class="card focus-within:outline outline-2">
+<div class={"card focus-within:outline outline-2 " + $$props.class}>
     <textarea class="w-full h-full align-top resize-none outline-none mb-4"
               bind:value
               use:autoresize
