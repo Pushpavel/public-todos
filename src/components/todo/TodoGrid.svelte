@@ -5,14 +5,14 @@
     import Todo from "./Todo.svelte";
 
     const db = getFirestore()
-    const todos = collectionData(query(collection(db, "Todos"), orderBy("createdAt", "desc")));
+    const todos = collectionData(query(collection(db, "Todos"), orderBy("createdAt", "desc")), {idField: "id"})
     let spans = {}
 </script>
 
 <main>
-    {#each ($todos || []) as todo (todo.text)}
-        <div class="pb-2" animate:flip={{duration:1000}} style={`grid-row: span ${spans[todo.text]};`}>
-            <Todo text={todo.text} bind:span={spans[todo.text]}/>
+    {#each ($todos || []) as todo (todo.id)}
+        <div class="pb-2" animate:flip={{duration:1000}} style={`grid-row: span ${spans[todo.id]};`}>
+            <Todo {todo} bind:span={spans[todo.id]}/>
         </div>
     {/each}
 </main>

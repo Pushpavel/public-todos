@@ -11,6 +11,7 @@
         const db = getFirestore()
         addDoc(collection(db, "Todos"), {
             text: value,
+            want: 0,
             createdAt: serverTimestamp()
         })
         value = ''
