@@ -1,0 +1,10 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card {
+    @apply bg-white shadow-lg rounded-lg;
+    border: 1px solid #e2e8f0;
+    padding: 16px;
+}
