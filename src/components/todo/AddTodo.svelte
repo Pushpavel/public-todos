@@ -4,12 +4,17 @@
 
     let value: string
 
-    function addTodo() {
+    function onKeyDown(e) {
+        if (!e.ctrlKey || e.keyCode !== 13) return
+        e.preventDefault()
+
         const db = getFirestore()
         addDoc(collection(db, "Todos"), {
             text: value,
             createdAt: serverTimestamp()
         })
+        value = ''
+        // todo: also resize the textarea back to the original height
     }
 
     // todo: validate textarea
@@ -20,9 +25,6 @@
     <textarea class="w-full h-full align-top resize-none outline-none"
               bind:value
               use:autoresize
-              on:keydown={(e)=>{
-                  if(e.altKey && e.keyCode === 13)
-                      addTodo()
-              }}
+              on:keydown={onKeyDown}
     ></textarea>
 </div>
