@@ -45,7 +45,7 @@
     }
 </script>
 
-<pre bind:this={ref} class="card mb-2 whitespace-pre-wrap leading-none flex flex-col justify-center">
+<pre bind:this={ref} class="card mb-2 whitespace-pre-wrap leading-none flex flex-col justify-center" tabindex="-1">
     <span class="flex" style="overflow-wrap: anywhere">{item.text}</span>
     <span class="flex justify-between mt-4 items-end footer">
             <button class:wanted class="flex pin-btn items-center tooltip-bottom"

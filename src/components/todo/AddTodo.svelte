@@ -25,7 +25,7 @@
     $: charCount = 255 - value.length
 </script>
 
-<div class={"card focus-within:outline outline-2 " + $$props.class} on:click={()=>textarea.focus()}>
+<div class={"card " + $$props.class} on:click={()=>textarea.focus()}>
     <textarea class="w-full h-full align-top resize-none outline-none mb-4"
               bind:this={textarea}
               bind:value

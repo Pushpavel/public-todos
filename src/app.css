@@ -3,15 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    @apply bg-gray-100;
+body {
+    @apply w-full h-full bg-gradient-to-r from-sky-400 to-blue-600 rounded-b-2xl;
     overflow-x: hidden;
     overflow-y: scroll;
+    @apply py-12 px-12 lg:px-64 xl:px-80;
 }
 
 .card {
     /*Outlined Card*/
-    @apply rounded-lg border-t border-gray-200 p-4 bg-white shadow;
+    @apply rounded-lg border-t border-gray-200 p-4 bg-white shadow focus-within:outline-none focus-within:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60;
 }
 
 
