@@ -45,8 +45,8 @@
     }
 </script>
 
-<pre class="card mb-2 whitespace-pre-wrap leading-none flex flex-col justify-center">
-    <span bind:this={ref} class="flex" style="overflow-wrap: anywhere">{item.text}</span>
+<pre bind:this={ref} class="card mb-2 whitespace-pre-wrap leading-none flex flex-col justify-center">
+    <span class="flex" style="overflow-wrap: anywhere">{item.text}</span>
     <span class="flex justify-between mt-4 items-end footer">
             <button class:wanted class="flex pin-btn items-center tooltip-bottom"
                     data-tooltip={wanted?"Done":"Want Todo"}
@@ -65,7 +65,7 @@
     }
 
     pre:hover .footer {
-        //padding-top: 16px;
+    //padding-top: 16px;
     }
 
     pre:hover .footer > span {

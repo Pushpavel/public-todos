@@ -15,7 +15,7 @@
     const [send, receive] = crossfade;
 
 </script>
-<main class={$$props.class+ " absolute"}>
+<main class={$$props.class + " absolute"}>
     {#each items as item (item.id)}
         <div
                 animate:flip={{duration:500}}

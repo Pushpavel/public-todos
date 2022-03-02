@@ -4,7 +4,9 @@
 @tailwind utilities;
 
 :root {
-    @apply bg-gray-100
+    @apply bg-gray-100;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .card {
@@ -12,6 +14,9 @@
     @apply rounded-lg border-t border-gray-200 p-4 bg-white shadow;
 }
 
+
+
+/*Tooltip*/
 body [data-tooltip]:before, body [data-tooltip]:after {
     transition: all 0.3s ease-in-out;
     font-family: Roboto, sans-serif;
