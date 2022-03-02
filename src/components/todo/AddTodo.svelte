@@ -3,6 +3,7 @@
     import {getFirestore, addDoc, collection, serverTimestamp} from "firebase/firestore"
 
     let value: string = ''
+    let textarea: HTMLTextAreaElement
 
     function onKeyDown(e) {
         if (!e.ctrlKey || e.keyCode !== 13) return
@@ -24,8 +25,9 @@
     $: charCount = 255 - value.length
 </script>
 
-<div class={"card focus-within:outline outline-2 " + $$props.class}>
+<div class={"card focus-within:outline outline-2 " + $$props.class} on:click={()=>textarea.focus()}>
     <textarea class="w-full h-full align-top resize-none outline-none mb-4"
+              bind:this={textarea}
               bind:value
               use:autoresize
               on:keydown={onKeyDown}

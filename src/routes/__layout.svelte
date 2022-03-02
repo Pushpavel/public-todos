@@ -13,11 +13,11 @@
 
 
 <main class="p-12">
-    <AddTodo class="mb-8"/>
+    <AddTodo class="mb-8 "/>
     <nav>
         <a href="/" class="text-blue-500">Home</a>
         <a href="/hot" class="text-blue-500">Hot</a>
-        <a href="/wanted" class="text-blue-500">Wanted</a>
+        <a href="/wanted" class="text-blue-500">Most Wanted</a>
     </nav>
     <div class="relative">
         <slot/>

@@ -3,8 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.card {
-    @apply bg-white shadow-lg rounded-lg;
-    border: 1px solid #e2e8f0;
-    padding: 16px;
+:root {
+    @apply bg-gray-100
 }
+
+.card {
+    /*Outlined Card*/
+    @apply rounded-lg border-t border-gray-200 p-4 bg-white shadow;
+}
+
