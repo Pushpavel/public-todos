@@ -9,26 +9,26 @@
     let ref
     onMount(() => setRefHeight(ref.clientHeight))
 
-
     $: wanted = ($todos).hasOwnProperty(item.id)
-
 
     const db = getFirestore()
 
     function toggleWantTodo() {
         const ref = doc(db, `Todos/${item.id}`)
 
+        updateDoc(ref, {
+            want: increment(wanted ? -1 : 1)
+        })
+
         if (wanted)
             removeLocalTodo(item.id)
         else
             addLocalTodo(item)
-
-        updateDoc(ref, {
-            want: increment(wanted ? -1 : 1)
-        })
     }
 
-    function timeAgo(timestamp: any) {
+    function timeAgo(timestamp: any) { // todo: update on interval
+        if (timestamp == null)
+            return "..."
         const date = new Timestamp(timestamp.seconds, timestamp.nanoseconds).toDate()
         const seconds = Math.floor((new Date() - date) / 1000)
         let interval = Math.floor(seconds / 31536000)
