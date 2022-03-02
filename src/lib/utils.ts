@@ -21,3 +21,26 @@ export function useCache(key: string, value: any) {
 
     return item
 }
+
+export function useTodoCache(key: string, todos: any) {
+    let items = useCache(key, todos)
+
+    // createdAt from firestore is a class Timestamp which affects comparison so clone it
+    for (const item of items)
+        item.createdAt = {...item.createdAt}
+
+    return items
+}
+
+const timers = {}
+
+export function debounce(id: any, time: number, callback: () => void) {
+    let timeout = timers[id]
+    if (timeout === undefined) {
+        callback()
+        timers[id] = null
+        return
+    }
+    clearTimeout(timeout);
+    timers[id] = setTimeout(callback, time);
+}

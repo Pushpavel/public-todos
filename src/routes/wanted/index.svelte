@@ -4,7 +4,7 @@
     import Todo from "../../components/todo/Todo.svelte";
     import Grid from "../../components/grid/Grid.svelte";
     import {isEqual} from 'lodash-es';
-    import {useCache} from "$lib/utils";
+    import {useTodoCache} from "$lib/utils";
 
     const db = getFirestore()
     const todos = collectionData(query(collection(db, "Todos"), orderBy("want", "desc"), orderBy("createdAt", "desc")), {idField: "id"})
@@ -12,7 +12,7 @@
     let todosList = []
 
     $:{
-        let items = useCache("wanted", $todos)
+        let items = useTodoCache("wanted", $todos)
         if (!isEqual(items, todosList))
             todosList = items
     }

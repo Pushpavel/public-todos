@@ -2,7 +2,6 @@
     import "../app.css";
     import {firebaseConfig} from "../env";
     import {initializeApp} from "firebase/app"
-    import AddTodo from "../components/todo/AddTodo.svelte";
     import {crossfade, blur} from 'svelte/transition';
     import {sineOut} from 'svelte/easing';
     import {setContext} from "svelte";
@@ -14,7 +13,7 @@
 </script>
 
 
-<AddTodo class="mb-8 "/>
+<!--<AddTodo class="mb-8 "/>-->
 <NavBar class="mb-8">
     <NavLink href="/" class="flex items-center justify-center">
         <span class="material-icons mr-2">task_alt</span>

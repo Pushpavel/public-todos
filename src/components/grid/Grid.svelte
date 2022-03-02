@@ -1,5 +1,5 @@
 <script>
-    import {mapObj} from "$lib/utils";
+    import {debounce, mapObj} from "$lib/utils";
     import {getContext} from "svelte";
     import {flip} from 'svelte/animate';
 
@@ -13,7 +13,6 @@
     })
 
     const [send, receive] = crossfade;
-
 </script>
 <main class={$$props.class + " absolute"}>
     {#each items as item (item.id)}
@@ -22,8 +21,7 @@
                 in:receive={{key: item.id}}
                 out:send={{key: item.id}}
                 style={`grid-row: span ${itemRowSpans[item.id]};`}>
-            <slot {item}
-                  setRefHeight={(h)=>itemRefHeights[item.id] = h}>
+            <slot {item} setRefHeight={(h)=>itemRefHeights[item.id] = h}>
             </slot>
         </div>
     {/each}
