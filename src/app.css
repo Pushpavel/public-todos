@@ -12,3 +12,8 @@
     @apply rounded-lg border-t border-gray-200 p-4 bg-white shadow;
 }
 
+body [data-tooltip]:before, body [data-tooltip]:after {
+    transition: all 0.3s ease-in-out;
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+}

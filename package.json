@@ -26,8 +26,8 @@
   "type": "module",
   "dependencies": {
     "firebase": "^9.6.7",
+    "lodash-es": "^4.17.21",
     "rxfire": "^6.0.3",
-    "svelte-textarea-autoresize": "^1.0.0",
-    "tippy.js": "^6.3.7"
+    "svelte-textarea-autoresize": "^1.0.0"
   }
 }

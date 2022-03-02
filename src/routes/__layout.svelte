@@ -3,12 +3,12 @@
     import {firebaseConfig} from "../env";
     import {initializeApp} from "firebase/app"
     import AddTodo from "../components/todo/AddTodo.svelte";
-    import {crossfade, scale} from 'svelte/transition';
-    import {sineOut} from 'svelte/easing';
+    import {crossfade, scale,fade} from 'svelte/transition';
+    import {sineOut, quintOut} from 'svelte/easing';
     import {setContext} from "svelte";
 
     initializeApp(firebaseConfig)
-    setContext('crossfade', crossfade({fallback: scale, duration: 500, easing: sineOut}))
+    setContext('crossfade', crossfade({fallback: scale, duration: 500, easing: sineOut}));
 </script>
 
 
