@@ -7,23 +7,27 @@ export function mapObj(obj, predicate: (item: any) => any) {
     }, {});
 }
 
-export function useCache(key: string, value: any) {
-    let item = value
-    if (!item) {
+export function useTodoCache(key: string, todos: any) {
+    let items = todos
+    if (!items) {
         if (browser)
-            item = JSON.parse(localStorage.getItem(`${key}_cache`) || "[]")
+            items = JSON.parse(localStorage.getItem(`${key}_list_cache`) || "[]")
         else
-            item = []
+            items = []
     }
 
-    if (browser)
-        localStorage.setItem(`${key}_cache`, JSON.stringify(item))
+    if (browser) {
+        localStorage.setItem(`${key}_cache`, JSON.stringify(items))
+        const todoCache = JSON.parse(localStorage.getItem(`todos_cache`) || "{}")
 
-    return item
-}
+        for (let item of items) {
+            if (item.id)
+                todoCache[item.id] = item
+        }
+        localStorage.setItem(`todos_cache`, JSON.stringify(todoCache))
 
-export function useTodoCache(key: string, todos: any) {
-    let items = useCache(key, todos)
+        items = items.map(item => todoCache[item.id])
+    }
 
     // createdAt from firestore is a class Timestamp which affects comparison so clone it
     for (const item of items)

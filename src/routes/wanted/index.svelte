@@ -18,6 +18,6 @@
     }
 </script>
 
-<Grid items={todosList} let:item let:setRefHeight>
+<Grid class="w-full" items={todosList} let:item let:setRefHeight>
     <Todo {item} {setRefHeight}/>
 </Grid>

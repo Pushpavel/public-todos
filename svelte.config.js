@@ -8,11 +8,24 @@ const config = {
   preprocess: [
     preprocess({
       postcss: true,
+
+      // scss: {
+      //   prependData: '@use "src/variables.scss" as *;',
+      // },
     }),
   ],
 
   kit: {
     adapter: adapter(),
+    // vite: {
+    //   css: {
+    //     preprocessorOptions: {
+    //       scss: {
+    //         additionalData: '@use "src/variables.scss" as *;',
+    //       },
+    //     },
+    //   },
+    // },
   },
 };
 

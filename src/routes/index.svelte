@@ -5,7 +5,7 @@
     import {Timestamp} from "firebase/firestore";
     import AddTodo from "../components/todo/AddTodo.svelte";
 
-    let todoList = []
+    let todoList
     $: {
         const values = Object.values($todos)
         values.sort((a, b) => new Timestamp(b.createdAt.seconds) - new Timestamp(a.createdAt.seconds))
@@ -13,7 +13,7 @@
     }
 </script>
 
-<Grid items={todoList} let:item let:setRefHeight>
+<Grid class="w-full" items={todoList} let:item let:setRefHeight>
     {#if item.id === 1}
         <AddTodo class="mb-2" {setRefHeight} />
     {:else}

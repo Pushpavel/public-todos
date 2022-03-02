@@ -20,7 +20,7 @@
 
 </script>
 
-<Grid items={todosList} let:item let:setRefHeight>
+<Grid class="w-full" items={todosList} let:item let:setRefHeight>
     {#if item.id === 1}
         <AddTodo class="mb-4" {setRefHeight} />
     {:else}
