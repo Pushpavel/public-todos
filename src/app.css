@@ -12,7 +12,7 @@ body {
 
 .card {
     /*Outlined Card*/
-    @apply rounded-lg border-t border-gray-200 p-4 bg-white shadow focus-within:outline-none focus-within:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60;
+    @apply rounded-lg border border-t border-gray-200 p-4 bg-white shadow focus-within:outline-none focus-within:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60;
 }
 
 

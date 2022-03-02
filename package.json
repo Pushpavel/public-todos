@@ -14,7 +14,7 @@
     "@sveltejs/kit": "next",
     "@types/firebase": "^3.2.1",
     "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.7",
     "postcss-load-config": "^3.1.1",
     "svelte": "^3.44.0",
     "svelte-check": "^2.2.6",
@@ -27,6 +27,7 @@
   "dependencies": {
     "firebase": "^9.6.7",
     "lodash-es": "^4.17.21",
+    "postcss-scss": "^4.0.3",
     "rxfire": "^6.0.3",
     "svelte-textarea-autoresize": "^1.0.0"
   }

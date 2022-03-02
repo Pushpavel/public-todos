@@ -22,7 +22,7 @@
 
 <Grid items={todosList} let:item let:setRefHeight>
     {#if item.id === 1}
-        <AddTodo class="mb-2" {setRefHeight} />
+        <AddTodo class="mb-4" {setRefHeight} />
     {:else}
         <Todo {item} {setRefHeight}/>
     {/if}
