@@ -8,6 +8,12 @@ export function mapObj(obj, predicate: (item: any) => any) {
     }, {});
 }
 
+export function addTodoToCache(item) {
+    const todoCache = JSON.parse(localStorage.getItem(`todos_cache`) || "{}")
+    todoCache[item.id] = item
+    localStorage.setItem(`todos_cache`, JSON.stringify(todoCache))
+}
+
 export function useTodoCache(key: string, todos: any[]) {
     let items = todos || [];
 
@@ -19,6 +25,7 @@ export function useTodoCache(key: string, todos: any[]) {
                 todoCache[item.id] = item
         }
         localStorage.setItem(`todos_cache`, JSON.stringify(todoCache))
+        updateLocalTodosFromTodoCache()
 
         if (todos)
             localStorage.setItem(`${key}_list_cache`, JSON.stringify(items.map(item => item.id)))
@@ -31,8 +38,6 @@ export function useTodoCache(key: string, todos: any[]) {
     // createdAt from firestore is a class Timestamp which affects comparison so clone it
     for (const item of items || [])
         item.createdAt = {...item.createdAt}
-
-    updateLocalTodosFromTodoCache()
 
     return items
 }

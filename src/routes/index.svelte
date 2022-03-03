@@ -3,11 +3,20 @@
     import Todo from "../components/todo/Todo.svelte";
     import {todos} from "$lib/local";
     import AddTodo from "../components/todo/AddTodo.svelte";
+    import {isEqual} from "lodash-es";
 
-    $: todoList = [{id: 1}, ...($todos)]
+
+    let todosList = [{id: 1}]
+
+    $: {
+        let items = [{id: 1}, ...$todos]
+
+        if (!isEqual(items, todosList))
+            todosList = items
+    }
+
 </script>
-
-<Grid class="w-full" items={todoList} let:item let:setRefHeight>
+<Grid class="w-full" items={todosList} let:item let:setRefHeight>
     {#if item.id === 1}
         <AddTodo class="mb-2" {setRefHeight}/>
     {:else}

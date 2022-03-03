@@ -1,9 +1,10 @@
 <script lang="ts">
     import {autoresize} from 'svelte-textarea-autoresize'
-    import {getFirestore, addDoc, collection, serverTimestamp} from "firebase/firestore"
+    import {getFirestore, collection, serverTimestamp, doc, setDoc} from "firebase/firestore"
     import {onMount} from "svelte";
-    import {debounce} from "$lib/utils";
+    import {addTodoToCache, debounce} from "$lib/utils";
     import {browser} from "$app/env";
+    import {addLocalTodo} from "$lib/local";
 
     const maxChars = 255
     const maxLines = 10
@@ -30,12 +31,28 @@
         if (finalValue.length === 0) return
 
         const db = getFirestore()
-        addDoc(collection(db, "Todos"), {
+        const todosRef = collection(db, "Todos")
+        const todoRef = doc(todosRef)
+        setDoc(todoRef, {
             text: finalValue,
             want: 1,
             createdAt: serverTimestamp()
         })
+
         value = ''
+
+        const todo = {
+            id: todoRef.id,
+            text: finalValue,
+            want: 1,
+            createdAt: {
+                seconds: Date.now() / 1000,
+                nanoseconds: 0
+            }
+        }
+
+        addTodoToCache(todo)
+        addLocalTodo(todo)
     }
 
 
