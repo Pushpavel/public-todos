@@ -7,7 +7,7 @@ body {
   @apply w-full h-full bg-gradient-to-r from-sky-400 to-blue-600 rounded-b-2xl;
   overflow-x: hidden;
   overflow-y: scroll;
-  @apply py-12 px-12 lg:px-64 xl:px-80;
+  @apply py-12 px-4 sm:px-12 lg:px-56 xl:px-64;
 }
 
 * {
