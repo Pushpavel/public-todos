@@ -16,6 +16,11 @@
     }
 
 </script>
+
+<svelte:head>
+    <title>Want Todo | Public Todos</title>
+</svelte:head>
+
 <Grid class="w-full" items={todosList} let:item let:setRefHeight>
     {#if item.id === 1}
         <AddTodo class="mb-2" {setRefHeight}/>

@@ -18,6 +18,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Most Wanted | Public Todos</title>
+</svelte:head>
+
 <Grid class="w-full" items={todosList} let:item let:setRefHeight>
     <Todo {item} {setRefHeight}/>
 </Grid>
