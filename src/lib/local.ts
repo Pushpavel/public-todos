@@ -1,23 +1,30 @@
 import {writable} from 'svelte/store';
+import {browser} from "$app/env";
 
-const initialTodos = (typeof localStorage !== 'undefined') ? JSON.parse(localStorage.getItem('todos') || "{}") : {};
+
+let initialTodos = []
+
+if (browser) {
+    const todoCache = JSON.parse(localStorage.getItem('todos_cache') || "{}");
+    initialTodos = JSON.parse(localStorage.getItem('local_list_cache') || "[]").map(id => todoCache[id]).filter(todo => !!todo);
+}
+
 export const todos = writable(initialTodos)
 
-if (typeof localStorage !== 'undefined')
-    todos.subscribe((value) => localStorage.setItem("todos", JSON.stringify(value) || "{}"))
+if (browser)
+    todos.subscribe((value) => localStorage.setItem("local_list_cache", JSON.stringify(value.map(t => t.id)) || "[]"))
 
 export function addLocalTodo(todo: any) {
-    todos.update((t) => {
-        const newt = {...t}
-        newt[todo.id] = todo
-        return newt
-    })
+    todos.update((t) => [todo, ...t])
 }
 
 export function removeLocalTodo(id: string) {
-    todos.update((t) => {
-        const newt = {...t}
-        delete newt[id]
-        return newt
-    })
+    todos.update((t) => t.filter(todo => todo.id !== id))
+}
+
+export function updateLocalTodosFromTodoCache() {
+    if (browser) {
+        const todoCache = JSON.parse(localStorage.getItem('todos_cache') || "{}");
+        todos.update((t) => t.map(todo => todoCache[todo.id] || todo))
+    }
 }

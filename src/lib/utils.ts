@@ -1,4 +1,5 @@
 import {browser} from "$app/env";
+import {updateLocalTodosFromTodoCache} from "$lib/local";
 
 export function mapObj(obj, predicate: (item: any) => any) {
     return Object.keys(obj).reduce((acc, key) => {
@@ -7,31 +8,31 @@ export function mapObj(obj, predicate: (item: any) => any) {
     }, {});
 }
 
-export function useTodoCache(key: string, todos: any) {
-    let items = todos
-    if (!items) {
-        if (browser)
-            items = JSON.parse(localStorage.getItem(`${key}_list_cache`) || "[]")
-        else
-            items = []
-    }
+export function useTodoCache(key: string, todos: any[]) {
+    let items = todos || [];
 
     if (browser) {
-        localStorage.setItem(`${key}_cache`, JSON.stringify(items))
         const todoCache = JSON.parse(localStorage.getItem(`todos_cache`) || "{}")
 
-        for (let item of items) {
+        for (let item of items || []) {
             if (item.id)
                 todoCache[item.id] = item
         }
         localStorage.setItem(`todos_cache`, JSON.stringify(todoCache))
 
-        items = items.map(item => todoCache[item.id])
+        if (todos)
+            localStorage.setItem(`${key}_list_cache`, JSON.stringify(items.map(item => item.id)))
+        else {
+            const ids = JSON.parse(localStorage.getItem(`${key}_list_cache`) || "[]")
+            items = ids.map(id => todoCache[id])
+        }
     }
 
     // createdAt from firestore is a class Timestamp which affects comparison so clone it
-    for (const item of items)
+    for (const item of items || [])
         item.createdAt = {...item.createdAt}
+
+    updateLocalTodosFromTodoCache()
 
     return items
 }

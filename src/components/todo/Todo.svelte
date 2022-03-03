@@ -9,7 +9,7 @@
     let ref
     onMount(() => setRefHeight(ref.clientHeight))
 
-    $: wanted = ($todos).hasOwnProperty(item.id)
+    $: wanted = !!($todos).find(t => t.id == item.id)
 
     const db = getFirestore()
 
