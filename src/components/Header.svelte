@@ -30,7 +30,7 @@
 </header>
 
 {#if toggle}
-    <main class="card mb-8 !bg-black/[0.5] text-white !p-8" in:slide out:slide={{duration:1000}}>
+    <main class="card mb-8 !bg-black/[0.5] text-white" in:slide out:slide>
         <p>Open todo board to look up things todo when bored and add things todo when bored.</p>
         <br>
         <h4 class="mb-4">
