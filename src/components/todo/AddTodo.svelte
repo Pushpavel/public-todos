@@ -7,7 +7,6 @@
     import {addLocalTodo} from "$lib/local";
 
     const maxChars = 255
-    const maxLines = 10
 
     let value: string = (browser && localStorage.getItem('todo-input')) || ''
     let textarea: HTMLTextAreaElement
@@ -22,10 +21,7 @@
 
     $: browser && localStorage.setItem('todo-input', value)
 
-    function onKeyDown(e) {
-        if (!e.ctrlKey || e.keyCode !== 13) return
-        e.preventDefault()
-
+    function addTodo() {
         const finalValue = value.trim()
 
         if (finalValue.length === 0) return
@@ -55,16 +51,21 @@
         addLocalTodo(todo)
     }
 
+    function onKeyDown(e) {
+        if (!e.ctrlKey || e.keyCode !== 13) return
+        e.preventDefault()
+
+        addTodo()
+    }
+
 
     $: charCount = maxChars - value.length
     $: notEmpty = value.length > 0
-    $: lineCount = maxLines - value.split("\n").length
 
-    $:{
-        const newlines = value.split("\n").length
-        if (newlines > maxLines)
-            value = value.split("\n").slice(0, newlines + (maxLines - newlines)).join("\n")
+    $: {
+        value = value.replace("\n", "")
     }
+
 </script>
 
 <div bind:this={ref} class={"add-card " + $$props.class} class:notEmpty on:click={()=>textarea.focus()}
@@ -79,9 +80,15 @@
             on:input={notifyHeight}
             maxlength="255"
     ></textarea>
-    <div class="flex status invisible justify-end"
-         style={`opacity: ${1 - Math.min(charCount/maxChars,lineCount/maxLines)}`}>
-        {charCount}  {lineCount}
+    <div class="flex justify-between">
+        <div class="flex status invisible justify-start"
+             style={`opacity: ${1 - charCount/maxChars}`}>
+            {charCount}
+        </div>
+        <button on:click={addTodo}
+                class="material-icons invisible text-gray-400 hover:bg-white rounded-full transition-all duration-200 active:text-black/[0.4] active:bg-gray-200 ">
+            add
+        </button>
     </div>
 </div>
 
@@ -105,6 +112,10 @@
 
       .status {
         color: red;
+        visibility: visible;
+      }
+
+      button {
         visibility: visible;
       }
     }

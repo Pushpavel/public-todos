@@ -2,7 +2,7 @@
     import GithubLogo from "./GithubLogo.svelte";
     import {slide} from 'svelte/transition'
 
-    let toggle = true
+    let toggle = false
 </script>
 
 <header class="grid sm:grid-flow-col-dense mb-8">

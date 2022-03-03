@@ -69,7 +69,7 @@
     }
 
     pre:hover .footer {
-    //padding-top: 16px;
+    padding-top: 4px;
     }
 
     pre:hover .footer > span {
@@ -81,6 +81,6 @@
     }
 
     .pin-btn.wanted {
-        @apply bg-indigo-50 border-indigo-500 text-indigo-600;
+        @apply bg-blue-50 border-blue-500 text-blue-600;
     }
 </style>
