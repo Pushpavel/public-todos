@@ -54,7 +54,7 @@
                 <span class="material-icons">trending_up</span>
                 <span class="ml-2">Most Wanted</span>
             </span>
-            Sections and mark todos you want todo. They show up in the
+            Tabs and mark todos you want todo. They show up in the
             <span class="block">
                 <span class="material-icons">task_alt</span>
                 <span class="ml-2">Want Todo</span>

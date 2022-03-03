@@ -52,9 +52,8 @@
     }
 
     function onKeyDown(e) {
-        if (!e.ctrlKey || e.keyCode !== 13) return
+        if (e.keyCode !== 13) return
         e.preventDefault()
-
         addTodo()
     }
 
